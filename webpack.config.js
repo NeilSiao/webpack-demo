@@ -36,11 +36,18 @@ module.exports = {
     rules: [
       {
         test: /\.jpg$/,
-        type: 'asset/resource',
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'img/[name].[ext]',
+            },
+          },
+        ],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [{ loader: MiniCssExtractPlugin.loader, options: { publicPath: '' } }, 'css-loader'],
       },
     ],
   },
